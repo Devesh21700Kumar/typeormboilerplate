@@ -23,6 +23,21 @@ app.post('/users',async (req: Request, res: Response)=>{
 
 })
 
+
+//Get
+app.get('/users',async (req: Request, res: Response)=>{
+
+    try{
+        const users =await User.find();
+        return res.status(200).json(users);
+    }
+    catch(err){
+        console.log(err);
+        return res.status(500).json(err);
+    }
+
+})
+
 createConnection().then(async (connection) => {
 
     /*console.log("Inserting a new user into the database...");
