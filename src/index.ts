@@ -38,6 +38,27 @@ app.get('/users',async (req: Request, res: Response)=>{
 
 })
 
+//Update
+app.put('/users/:uuid',async (req: Request, res: Response)=>{
+
+    const uuid = req.params.uuid;
+    const {name,email,role} = req.body;
+
+    try{
+        const user =await User.findOneOrFail({uuid});
+        user.name =name || user.name;
+        user.email =email || user.email
+        user.role =role || user.role
+        await user.save();
+        return res.status(200).json(user);
+    }
+    catch(err){
+        console.log(err);
+        return res.status(500).json(err);
+    }
+
+})
+
 createConnection().then(async (connection) => {
 
     /*console.log("Inserting a new user into the database...");
