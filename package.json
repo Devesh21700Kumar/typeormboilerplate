@@ -12,7 +12,8 @@
       "express": "^4.17.1",
       "pg": "^8.5.1",
       "reflect-metadata": "^0.1.10",
-      "typeorm": "0.2.31"
+      "typeorm": "0.2.31",
+      "uuid": "^8.3.2"
    },
    "scripts": {
       "start": "ts-node src/index.ts",
