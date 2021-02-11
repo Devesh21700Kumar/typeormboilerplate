@@ -50,7 +50,26 @@ app.put('/users/:uuid',async (req: Request, res: Response)=>{
         user.email =email || user.email
         user.role =role || user.role
         await user.save();
+        //res.status(201) resource Updated
         return res.status(200).json(user);
+    }
+    catch(err){
+        console.log(err);
+        return res.status(500).json(err);
+    }
+
+})
+
+//Delete
+app.delete('/users/:uuid',async (req: Request, res: Response)=>{
+
+    const uuid = req.params.uuid;
+
+    try{
+        const user =await User.findOneOrFail({uuid});
+        await user.remove();
+        //res.status(204) resource does not exist
+        return res.status(200).json({message: 'User Deleted successfully'});
     }
     catch(err){
         console.log(err);
